@@ -1,1 +1,1 @@
-This is a laravel-ailwind project for my learning journey
+This is a laravel-tailwind project for my learning journey
