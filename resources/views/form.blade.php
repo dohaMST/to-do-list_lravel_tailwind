@@ -2,14 +2,14 @@
 
 @section('title', isset($task)? "edit Task" : "add Task")
 
-@section('styles')
+{{-- @section('styles')
     <style>
         .error_msg{
             color: red;
             font-size: .8rem;
         }
     </style>
-@endsection
+@endsection --}}
 
 @section('content')
 
@@ -24,7 +24,11 @@
         <label for="title">
             Title
         </label>
-        <input type="text" id="title" name="title" value="{{$task->title ?? old('title')}}">
+        <input
+            {{-- two ways to style the error case --}}
+            class="@error ('title') border-red-500 @enderror "
+            {{-- @class(['border-red-500' => $errors->has("title")]) --}}
+            type="text" id="title" name="title" value="{{$task->title ?? old('title')}}">
     </div>
 
     @error('title')
@@ -35,7 +39,9 @@
         <label for="description">
             Description
         </label>
-        <textarea type="text" id="desc" name="description" >{{$task->description ?? old("description")}}</textarea>
+        <textarea
+            @class(['border-red-500'=>$errors->has("description")])
+            type="text" id="desc" name="description" >{{$task->description ?? old("description")}}</textarea>
     </div>
     @error('description')
         <p class="error_msg"> {{$message}} </p>
@@ -45,20 +51,23 @@
         <label for="long_description">
             Long Description
         </label>
-        <textarea type="text" id="Ldesc" name="long_description" rows="10" >{{$task->long_description ?? old("long_description")}}</textarea>
+        <textarea
+            @class(['border-red-500'=>$errors->has("long_description")])
+            type="text" id="Ldesc" name="long_description" rows="10" >{{$task->long_description ?? old("long_description")}}</textarea>
     </div>
     @error('long_description')
         <p class="error_msg"> {{$message}} </p>
     @enderror
 
-    <div>
-        <button type="submit">
+    <div class="flex items-center gap-2 ">
+        <button type="submit" class="btn capitalize cursor-pointer">
             @isset($task)
                 update task
             @else
                 add task
             @endisset
         </button>
+        <a class="link capitalize" href="{{route('tasks.index')}}">cancel</a>
     </div>
 </form>
 

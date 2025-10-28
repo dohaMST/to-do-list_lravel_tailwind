@@ -17,7 +17,7 @@
 
         @endif --}}
         <div class="mb-4">
-            <a class="font-medium text-gray-700 underline decoration-pink-500" href="{{route('tasks.create')}}">Add New Task</a>
+            <a class="link" href="{{route('tasks.create')}}">Add New Task</a>
         </div>
 
         @forelse ($tasks as $task)

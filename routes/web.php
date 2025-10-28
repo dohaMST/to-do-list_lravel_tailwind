@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Requests\TaskRequest;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Models\Task;
+use App\Http\Requests\TaskRequest;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -96,7 +96,7 @@ Route::post('/tasks', function(TaskRequest $request){
 //     return redirect()->route('tasks.show', ['task'=> $task])
 //                     ->with('success', 'Task updated successfully');
 // })->name('tasks.update');
-Route::put('/tasks/{task}', function(Task $task, TaskRequest $request){
+Route::put('/tasks/{task}', function(TaskRequest $request, Task $task){
     // $data = $request->validated();
     $task->update($request->validated());
 
@@ -109,10 +109,10 @@ Route::delete("/tasks/{task}", function(Task $task){
     $task->delete();
 
     return redirect()->route('tasks.index')
-                    ->with("success","task delted successfully");
+                    ->with("success","task deleted successfully");
 })->name("tasks.destroy");
 
-Route::put("/tasks/{task}", function(Task $task){
+Route::put("/tasks/{task}/toggle", function(Task $task){
     $task->toggleComplete();
     return redirect()->back()->with("success","task updated successfully");
 })->name('tasks.toggle');

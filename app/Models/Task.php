@@ -12,6 +12,7 @@ class Task extends Model
     //     return "slung";
     // }
 
+    // for UPDATE purpose
     protected $fillable =[
         "title",
         "description",
